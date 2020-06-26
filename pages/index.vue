@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto">
+  <div class="container mx-auto px-2 sm:px-0">
     <button @click="setArticlesHandler">hit me</button>
 
     <ul class="grid row-gap-12 sm:grid-cols-2 xl:grid-cols-3 sm:col-gap-6">
