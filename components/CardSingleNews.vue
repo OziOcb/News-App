@@ -1,31 +1,36 @@
 <template>
-  <article
-    class="h-full bg-gray-200 pb-12 sm:pb-8 shadow-lg rounded-lg overflow-hidden relative hover:bg-gray-800 hover:text-white transition-all duration-500 transform hover:scale-105 cursor-pointer"
-  >
-    <a :href="article.url" target="_blank" rel="noopener noreferrer">
-      <img
-        v-if="article.urlToImage"
-        :src="article.urlToImage"
-        :alt="article.title"
-        class="h-48 w-full object-cover"
-      />
-      <img
-        v-else
-        src="@/assets/img/no_image.jpg"
-        :alt="article.title"
-        class="h-48 w-full object-cover"
-      />
+  <article class="article">
+    <a
+      :href="article.url"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="focus:outline-none"
+    >
+      <div class="h-64 w-full overflow-hidden">
+        <img
+          v-if="article.urlToImage"
+          :src="article.urlToImage"
+          :alt="article.title"
+          class="h-64 w-full object-cover transition-all duration-500"
+        />
+        <img
+          v-else
+          src="@/assets/img/no_image.jpg"
+          :alt="article.title"
+          class="h-64 w-full object-cover transition-all duration-500"
+        />
+      </div>
 
       <div class="p-6 mb-auto">
+        <span
+          class="inline-block bg-gray-400 text-gray-900 text-xs mb-2 py-1 pl-2 pr-4 rounded-r-full uppercase tracking-wide"
+          >{{ article.publishedAt }}</span
+        >
         <h2 class="font-semibold text-lg leading-tight mb-3">
           {{ article.title }}
         </h2>
         <p>{{ article.description }}</p>
       </div>
-
-      <footer class="absolute bottom-0 w-full text-center">
-        {{ article.publishedAt }}
-      </footer>
     </a>
   </article>
 </template>
@@ -40,3 +45,20 @@ export default {
   },
 }
 </script>
+
+<style>
+.article {
+  @apply relative h-full bg-gray-200 pb-4 shadow-lg rounded-lg overflow-hidden cursor-pointer transition-all duration-500 transform;
+}
+
+.article:hover,
+.article:focus-within {
+  @apply bg-gray-800 text-white shadow-2xl scale-105;
+}
+
+.article:hover img,
+.article:focus-within img {
+  transform: scale(1.1);
+  filter: grayscale(1) brightness(0.4);
+}
+</style>
