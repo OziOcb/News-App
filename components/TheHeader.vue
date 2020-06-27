@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import HamburgerMenu from '@/assets/icons/hamburgerMenu.svg?inline'
 
 export default {
@@ -64,16 +65,22 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['setArticles']),
     navToggleHandler() {
       this.isOpen = !this.isOpen
     },
     capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1)
     },
-    changeCategoryHandler(e) {
-      const targetCategory = e.target.dataset.category
-      if (!targetCategory) return
+    async changeCategoryHandler(e) {
+      let targetCategory = e.target.dataset.category
+      if (!targetCategory || targetCategory === this.pickedCategory) return
+      if (targetCategory === 'all') targetCategory = ''
+
       this.pickedCategory = targetCategory
+      this.isOpen = false
+
+      await this.setArticles({ country: '', category: targetCategory })
     },
   },
 }
