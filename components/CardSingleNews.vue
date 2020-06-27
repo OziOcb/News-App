@@ -24,7 +24,7 @@
       <div class="p-6 mb-auto">
         <span
           class="inline-block bg-gray-400 text-gray-900 text-xs mb-2 py-1 pl-2 pr-4 rounded-r-full uppercase tracking-wide"
-          >{{ article.publishedAt }}</span
+          >{{ displayTimeAgo(article.publishedAt) }}</span
         >
         <h2 class="font-semibold text-lg leading-tight mb-3">
           {{ article.title }}
@@ -36,11 +36,18 @@
 </template>
 
 <script>
+import timeAgo from '@/utils/timeAgo'
+
 export default {
   props: {
     article: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    displayTimeAgo(date) {
+      return timeAgo(date.toString())
     },
   },
 }
