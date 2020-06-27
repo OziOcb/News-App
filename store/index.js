@@ -1,15 +1,20 @@
 export const state = () => ({
   articles: [],
+  isFetching: false,
 })
 
 export const getters = {
   getArticles(state) {
     return state.articles
   },
+  getIsFetching(state) {
+    return state.isFetching
+  },
 }
 
 export const actions = {
-  async setArticles({ commit }, params) {
+  async setArticles({ commit, dispatch }, params) {
+    dispatch('toggleIsFetching', true)
     const { country, category } = params
 
     try {
@@ -24,14 +29,22 @@ export const actions = {
 
       commit('SET_ARTICLES', response.data.articles)
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.log(error)
     }
+
+    dispatch('toggleIsFetching', false)
+  },
+
+  toggleIsFetching({ commit }, isFetching) {
+    commit('TOGGLE_IS_FETCHING', isFetching)
   },
 }
 
 export const mutations = {
   SET_ARTICLES(state, articles) {
     state.articles = articles
+  },
+  TOGGLE_IS_FETCHING(state, isFetching) {
+    state.isFetching = isFetching
   },
 }
