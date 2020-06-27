@@ -42,6 +42,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter'
 import HamburgerMenu from '@/assets/icons/hamburgerMenu.svg?inline'
 
 export default {
@@ -66,12 +67,15 @@ export default {
   },
   methods: {
     ...mapActions(['setArticles']),
+
     navToggleHandler() {
       this.isOpen = !this.isOpen
     },
+
     capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1)
+      return capitalizeFirstLetter(string)
     },
+
     async changeCategoryHandler(e) {
       let targetCategory = e.target.dataset.category
       if (!targetCategory || targetCategory === this.pickedCategory) return
