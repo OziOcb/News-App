@@ -9,6 +9,12 @@
       </nuxt-link>
 
       <button
+        ref="toggleButton"
+        data-toggle="collapse"
+        data-target="#theMainNav"
+        aria-controls="theMainNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
         class="flex lg:hidden items-center px-3 py-2 text-gray-800 transition-colors duration-300 hover:text-white"
         @click="navToggleHandler"
       >
@@ -16,8 +22,9 @@
       </button>
 
       <TheMainNav
+        id="theMainNav"
         :class="isOpen ? 'block' : 'hidden'"
-        @close-main-menu="isOpen = false"
+        @close-main-menu="closeNavHandler"
       />
     </div>
   </header>
@@ -38,7 +45,23 @@ export default {
     }
   },
   methods: {
+    closeNavHandler() {
+      this.$refs.toggleButton.setAttribute('aria-expanded', false)
+      this.isOpen = false
+    },
+
     navToggleHandler() {
+      const toggleButton = this.$refs.toggleButton
+      let ariaExpanded = toggleButton.getAttribute('aria-expanded')
+
+      if (ariaExpanded === 'true') {
+        ariaExpanded = 'false'
+      } else {
+        ariaExpanded = 'true'
+      }
+
+      toggleButton.setAttribute('aria-expanded', ariaExpanded)
+
       this.isOpen = !this.isOpen
     },
   },
