@@ -6,29 +6,22 @@
       rel="noopener noreferrer"
       class="focus:outline-none"
     >
-      <div class="h-64 w-full overflow-hidden">
-        <img
-          v-if="article.urlToImage"
-          :src="article.urlToImage"
-          :alt="article.title"
-          class="h-64 w-full object-cover transition-all duration-500"
-        />
-        <img
-          v-else
-          src="@/assets/img/no_image.jpg"
-          :alt="article.title"
-          class="h-64 w-full object-cover transition-all duration-500"
-        />
-      </div>
+      <ImageSingleNews
+        :url-to-image="article.urlToImage"
+        :alt="article.title"
+      />
 
       <div class="p-6 mb-auto">
         <span
           class="inline-block bg-gray-400 text-gray-900 text-xs mb-2 py-1 pl-2 pr-4 rounded-r-full uppercase tracking-wide"
-          >{{ displayTimeAgo(article.publishedAt) }}</span
         >
+          {{ displayTimeAgo(article.publishedAt) }}
+        </span>
+
         <h2 class="font-semibold text-lg leading-tight mb-3">
           {{ article.title }}
         </h2>
+
         <p>{{ article.description }}</p>
       </div>
     </a>
@@ -37,14 +30,19 @@
 
 <script>
 import timeAgo from '@/utils/timeAgo'
+import ImageSingleNews from '@/components/ImageSingleNews.vue'
 
 export default {
+  components: {
+    ImageSingleNews,
+  },
   props: {
     article: {
       type: Object,
       required: true,
     },
   },
+
   methods: {
     displayTimeAgo(date) {
       return timeAgo(date.toString())
@@ -64,7 +62,9 @@ export default {
 }
 
 .article:hover img,
-.article:focus-within img {
+.article:focus-within img,
+.article:hover .noImagePlaceholder,
+.article:focus-within .noImagePlaceholder {
   transform: scale(1.1);
   filter: grayscale(1) brightness(0.4);
 }
