@@ -1,12 +1,14 @@
 <template>
   <header class="fixed top-0 w-full z-10 bg-gray-400 p-6">
     <div class="container mx-auto flex items-center justify-between flex-wrap">
-      <nuxt-link
-        class="text-gray-800 mr-6 font-semibold text-xl tracking-tight transition-colors duration-300 hover:text-white"
-        to="/"
-      >
-        PAUL'S NEWS
-      </nuxt-link>
+      <h1>
+        <nuxt-link
+          class="text-gray-800 mr-6 font-thin text-2xl tracking-tight transition-colors duration-300 hover:text-white"
+          to="/"
+        >
+          NEWS<span class="font-semibold">LIVE</span>.co.uk
+        </nuxt-link>
+      </h1>
 
       <button
         ref="toggleButton"
@@ -67,3 +69,4 @@ export default {
   },
 }
 </script>
+2
