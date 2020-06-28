@@ -9,16 +9,19 @@
       <div class="h-64 w-full overflow-hidden">
         <img
           v-if="article.urlToImage"
+          v-show="isLoad"
           :src="article.urlToImage"
           :alt="article.title"
           class="h-64 w-full object-cover transition-all duration-500"
+          @load="loaded"
         />
-        <img
+
+        <div
           v-else
-          src="@/assets/img/no_image.jpg"
-          :alt="article.title"
-          class="h-64 w-full object-cover transition-all duration-500"
-        />
+          class="noImagePlaceholder h-64 w-full transition-all duration-500 flex items-center justify-center text-4xl font-bold bg-gray-400 text-gray-100"
+        >
+          no image
+        </div>
       </div>
 
       <div class="p-6 mb-auto">
@@ -45,9 +48,18 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      isLoad: false,
+    }
+  },
   methods: {
     displayTimeAgo(date) {
       return timeAgo(date.toString())
+    },
+
+    loaded() {
+      this.isLoad = true
     },
   },
 }
@@ -64,7 +76,9 @@ export default {
 }
 
 .article:hover img,
-.article:focus-within img {
+.article:focus-within img,
+.article:hover .noImagePlaceholder,
+.article:focus-within .noImagePlaceholder {
   transform: scale(1.1);
   filter: grayscale(1) brightness(0.4);
 }
