@@ -1,10 +1,8 @@
 <template>
   <div class="container mx-auto px-2 sm:px-0">
-    <button @click="setArticlesHandler">hit me</button>
-
     <ul
       v-if="!getIsFetching"
-      class="grid row-gap-12 sm:grid-cols-2 xl:grid-cols-3 sm:col-gap-6"
+      class="mt-32 grid row-gap-12 sm:grid-cols-2 xl:grid-cols-3 sm:col-gap-6"
     >
       <li v-for="(article, index) in getArticles" :key="index">
         <CardSingleNews :article="article" />
@@ -43,10 +41,6 @@ export default {
   },
   methods: {
     ...mapActions(['setArticles']),
-
-    setArticlesHandler() {
-      this.setArticles(this.params)
-    },
   },
 }
 </script>
