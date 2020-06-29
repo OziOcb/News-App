@@ -19,9 +19,9 @@ export const actions = {
 
     try {
       const response = await this.$axios.get(
-        `top-headlines?country=${country || 'gb'}&category=${category}&apiKey=${
-          process.env.API_KEY
-        }`
+        `top-headlines?country=${
+          country || 'gb'
+        }&category=${category}&apiKey=6d47d491f5894f70ae7d64d1ea96df3d`
       )
 
       commit('SET_ARTICLES', response.data.articles)
