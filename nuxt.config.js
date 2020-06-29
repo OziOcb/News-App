@@ -66,9 +66,7 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {
-    baseURL: 'https://newsapi.org/v2/',
-  },
+  axios: {},
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/

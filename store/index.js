@@ -16,10 +16,13 @@ export const actions = {
   async setArticles({ commit, dispatch }, params) {
     dispatch('toggleIsFetching', true)
     const { country, category } = params
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
 
     try {
       const response = await this.$axios.get(
-        `top-headlines?country=${country || 'gb'}&category=${category}`,
+        `${proxyUrl}https://newsapi.org/v2/top-headlines?country=${
+          country || 'gb'
+        }&category=${category}`,
         {
           headers: {
             Authorization: `Bearer ${process.env.API_KEY}`,
