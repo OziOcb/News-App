@@ -21,7 +21,12 @@ export const actions = {
       const response = await this.$axios.get(
         `top-headlines?country=${
           country || 'gb'
-        }&category=${category}&apiKey=6d47d491f5894f70ae7d64d1ea96df3d`
+        }&category=${category}&apiKey=6d47d491f5894f70ae7d64d1ea96df3d`,
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+          },
+        }
       )
 
       commit('SET_ARTICLES', response.data.articles)
