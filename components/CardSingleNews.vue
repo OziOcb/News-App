@@ -6,10 +6,7 @@
       rel="noopener noreferrer"
       class="focus:outline-none"
     >
-      <ImageSingleNews
-        :url-to-image="article.urlToImage"
-        :alt="article.title"
-      />
+      <ImageSingleNews />
 
       <div class="p-6 mb-auto">
         <span
